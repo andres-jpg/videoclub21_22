@@ -8,7 +8,7 @@
 
     <div class="col-sm-4">
 
-        <a href="{{ url('/catalog/show/' . $id ) }}">
+        <a href="{{ url('/catalog/show/' . $pelicula -> id ) }}">
             <img src="{{$pelicula['poster']}}" style="height:200px"/>
         </a>
 
@@ -32,7 +32,7 @@
         @else
             <a class="btn btn-primary" href="#">Alquilar pel&iacute;cula</a>
         @endif
-        <a class="btn btn-warning" href="{{ url('/catalog/edit/' . $id ) }}">
+        <a class="btn btn-warning" href="{{ url('/catalog/edit/' . $pelicula -> id ) }}">
             <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
             Editar pel&iacute;cula</a>
         <a class="btn btn-outline-info" href="{{ action('App\Http\Controllers\CatalogController@getIndex') }}">Volver al listado</a>
