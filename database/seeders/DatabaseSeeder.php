@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
         self::seedCatalog();
         self::seedUsers();
         $this->command->info('Tabla catálogo inicializada con datos!');
+        \App\Models\User::factory(10)->create();
     }
 
 
