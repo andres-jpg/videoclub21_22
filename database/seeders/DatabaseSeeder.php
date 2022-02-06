@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use App\Models\Movie;
 use App\Models\User;
+use Illuminate\Support\Facades\App;
 
 class DatabaseSeeder extends Seeder
 {
@@ -15,17 +16,25 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        self::seedCatalog();
-        self::seedUsers();
+        if (App::environment('local')) {
+            // The environment is local
+            self::seedCatalog();
+            self::seedUsers();
+        } else {
+            if(Movie::count()==0){
+                self::seedCatalog();
+            }
+        }
+
         $this->command->info('Tabla catálogo inicializada con datos!');
     }
 
 
     private static function seedUsers()
     {
-        User::truncate();
+        //User::truncate();
         // Crear 2 registros de usuario
-        \App\Models\User::factory(2)->create();
+        //\App\Models\User::factory(2)->create();
         // Crear al administrador
         /*
         $admin = new User();
@@ -40,6 +49,33 @@ class DatabaseSeeder extends Seeder
             'name' => env('ADMIN_NAME', 'admin'),
             'email' => env('ADMIN_EMAIL', 'email.email.com'),
             'password' => bcrypt(env('ADMIN_PASSWORD', 'alumno')),
+            'administrador' => false,
+            'proveedor' => false
+
+        ]);
+
+        User::create([
+            'name' => 'Andres',
+            'email' => '4153518@alu.murciaeduca.es',
+            'password' => bcrypt('password'),
+            'administrador' => true,
+            'proveedor' => false
+        ]);
+
+        User::create([
+            'name' => 'Alberto',
+            'email' => 'alberto.sierra@murciaeduca.es',
+            'password' => bcrypt('password'),
+            'administrador' => false,
+            'proveedor' => true
+        ]);
+
+        User::create([
+            'name' => 'Sin Permisos',
+            'email' => 'sinPermisos@peliculas.com',
+            'password' => bcrypt('password'),
+            'administrador' => false,
+            'proveedor' => false
         ]);
 
     }
