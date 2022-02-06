@@ -19,7 +19,7 @@ class MoviePolicy
 
     public function before(User $user, $ability)
     {
-        return $user->isAdministrador();
+        return $user->esAdministrador();
     }
 
     public function viewAny(User $user)
@@ -47,7 +47,7 @@ class MoviePolicy
      */
     public function create(User $user)
     {
-        return $user->isProveedor();
+        return $user->esProveedor();
     }
 
     /**
@@ -71,7 +71,7 @@ class MoviePolicy
      */
     public function delete(User $user, Movie $movie)
     {
-        return $user->isProveedor();
+        return $user->esProveedor();
     }
 
     /**
