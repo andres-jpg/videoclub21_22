@@ -19,7 +19,9 @@ class MoviePolicy
 
     public function before(User $user, $ability)
     {
-        return $user->esAdministrador();
+        if ($user->esAdministrator()) {
+            return true;
+        }
     }
 
     public function viewAny(User $user)

@@ -11,10 +11,6 @@ use App\Http\Resources\MovieResource;
 class MovieController extends Controller
 {
 
-    public function __construct()
-    {
-        $this->authorizeResource(Movie::class, 'movie');
-    }
 
     /**
      * Display a listing of the resource.
@@ -34,6 +30,8 @@ class MovieController extends Controller
      */
     public function store(Request $request)
     {
+        $this->authorize('create', Movie::class);
+
         $movie = json_decode($request->getContent(), true);
 
         $movie = Movie::create($movie);
@@ -75,6 +73,7 @@ class MovieController extends Controller
      */
     public function destroy(Movie $movie)
     {
+        $this->authorize('delete', $movie);
         $movie->delete();
     }
 

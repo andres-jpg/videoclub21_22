@@ -45,14 +45,19 @@ class DatabaseSeeder extends Seeder
         */
         //Utilizando el método create()
 
+        /*
         User::create([
+
+
             'name' => env('ADMIN_NAME', 'admin'),
             'email' => env('ADMIN_EMAIL', 'email.email.com'),
             'password' => bcrypt(env('ADMIN_PASSWORD', 'alumno')),
             'administrador' => false,
             'proveedor' => false
 
+
         ]);
+        */
 
         User::create([
             'name' => 'Andres',
