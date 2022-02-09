@@ -32,6 +32,11 @@ Route::get('/peliculas/search/{search}', [MovieController::class, 'search']);
 
 });
 
+Route::apiResource('directores', DirectorController::class)
+    ->parameters([
+        'directores' => 'director'
+    ]);
+
 Route::post('/tokens/create', function (Request $request) {
     $request->validate([
         'email' => 'required|email',
