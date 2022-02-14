@@ -79,4 +79,29 @@ class DirectorController extends Controller
 
         $director->delete();
     }
+
+    public function import() {
+
+        $peliculas = \App\Models\Movie::all();
+
+        foreach($peliculas as $pelicula) {
+
+            $directorStr = $pelicula->director;
+            $espacio = strpos($directorStr, ' ');
+            $nombre = substr($directorStr, 0, $espacio);
+            $apellidos = substr($directorStr, $espacio + 1);
+
+            if(!$director = Director::existDirector($nombre, $apellidos)) {
+
+                $director = Director::create([
+                    'nombre' => $nombre,
+                    'apellidos' => $apellidos,
+                ]);
+            }
+
+            $pelicula->director_id = $director->id;
+            $pelicula->save();
+
+        }
+    }
 }
