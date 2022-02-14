@@ -18,4 +18,8 @@ class Movie extends Model
         'rented',
         'synopsis'
     ];
+
+    public function elDirector() {
+        return $this->belongsTo(Director::class, 'director_id');
+    }
 }
